@@ -356,6 +356,8 @@ img, video { max-width: 100%; display: block; }
 .env-tile .env { width: 100%; }
 .env-tile .who { font-family: var(--font-hand), cursive; font-size: 30px; line-height: 1; margin-top: 12px; }
 .env-tile.read .who { color: var(--muted); }
+/* An odd envelope out (e.g. the 5th) sits centred on its own row. */
+.env-tile:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
 
 .empty { text-align: center; color: var(--muted); padding: 48px 12px; }
 .empty .big { font-size: 48px; }

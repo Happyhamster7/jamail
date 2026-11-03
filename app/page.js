@@ -45,13 +45,13 @@ export default function Home() {
   return (
     <main className="page with-cat">
       <h1 className="brand">JA<span className="jam">M</span>ail</h1>
-      <p className="tagline">You have 1 new message</p>
+      <p className="tagline">You have 5 new messages</p>
       <button
         onClick={open}
         aria-label="Open your mail"
         style={{ display: 'block', margin: '24px auto 0', background: 'none', border: 'none', padding: 0 }}
       >
-        <Envelope open={opening} badge={1} className={`splash-env ${opening ? '' : 'wiggle'}`} />
+        <Envelope open={opening} badge={5} className={`splash-env ${opening ? '' : 'wiggle'}`} />
       </button>
       <p className="tap-hint">tap to open</p>
       <Cat />
