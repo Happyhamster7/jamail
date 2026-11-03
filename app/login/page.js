@@ -82,7 +82,7 @@ export default function Login() {
           Log in
         </button>
       </div>
-      <Cat />
+      <Cat photo="login" />
     </main>
   );
 }

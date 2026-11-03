@@ -48,7 +48,7 @@ export default function Folders() {
           );
         })}
       </ul>
-      <Cat />
+      <Cat photo="dashboard" />
     </main>
   );
 }

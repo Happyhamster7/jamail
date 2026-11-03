@@ -134,23 +134,28 @@ img, video { max-width: 100%; display: block; }
 /* ---------- Cat ---------- */
 .cat-wrap {
   position: fixed;
-  right: -34px;
-  bottom: -46px;
-  width: 230px;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 150px;
   z-index: 5;
   border: none;
   background: none;
   padding: 0;
 }
-.cat-wrap svg {
+.cat-photo {
   width: 100%;
-  overflow: visible;
+  aspect-ratio: 1;
+  background-color: #b9b8bd;
+  background-repeat: no-repeat;
+  border: 6px solid #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 22px rgba(43, 32, 36, 0.22), 0 0 0 1.5px rgba(43, 32, 36, 0.12);
   transform-origin: 50% 100%;
   animation: sway 3.2s ease-in-out infinite;
 }
 @keyframes sway {
-  0%, 100% { transform: translateX(-10px) rotate(-5deg); }
-  50% { transform: translateX(10px) rotate(5deg); }
+  0%, 100% { transform: translateX(-6px) rotate(-4deg); }
+  50% { transform: translateX(6px) rotate(4deg); }
 }
 .meow {
   position: absolute;

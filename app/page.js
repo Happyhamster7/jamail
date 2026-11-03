@@ -54,7 +54,7 @@ export default function Home() {
         <Envelope open={opening} badge={5} className={`splash-env ${opening ? '' : 'wiggle'}`} />
       </button>
       <p className="tap-hint">tap to open</p>
-      <Cat />
+      <Cat photo="splash" />
     </main>
   );
 }
