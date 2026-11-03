@@ -1,28 +1,30 @@
 'use client';
 import { useState } from 'react';
 
-// Photos of the real Jam Jam (public/jamjam/*.jpg, all 3:4 portraits).
-// size/pos crop each one into the square frame via background-size/position.
+// Cut-out photos of the real Jam Jam (public/jamjam/*.webp, transparent).
+// splash and login are cut off along the bottom (and login's left side),
+// so those edges are tucked against the screen edge; flip mirrors login so
+// its cut side faces the right edge.
 const PHOTOS = {
-  splash: { src: '/jamjam/splash.jpg', size: '112%', pos: '50% 42%' },
-  login: { src: '/jamjam/login.jpg', size: '167%', pos: '63% 0%' },
-  dashboard: { src: '/jamjam/dashboard.jpg', size: '136%', pos: '38% 13%' },
+  splash: { src: '/jamjam/splash.webp', width: 160 },
+  login: { src: '/jamjam/login.webp', width: 150, flip: true },
+  dashboard: { src: '/jamjam/dashboard.webp', width: 120, lift: 12, inset: 14 },
 };
 
-// Jam Jam in a little photo frame in the bottom-right corner, swaying
-// side to side. Tap her for a meow.
+// Jam Jam peeking in from the bottom-right corner, swaying side to side.
+// Tap her for a meow.
 export default function Cat({ photo = 'splash' }) {
   const [taps, setTaps] = useState(0);
   const p = PHOTOS[photo] || PHOTOS.splash;
   return (
-    <button className="cat-wrap" aria-label="Jam Jam the cat" onClick={() => setTaps((t) => t + 1)}>
+    <button
+      className="cat-wrap"
+      aria-label="Jam Jam the cat"
+      style={{ width: p.width, marginBottom: p.lift || 0, right: p.inset || 0 }}
+      onClick={() => setTaps((t) => t + 1)}
+    >
       <div key={taps} className={`meow ${taps ? 'tapped' : ''}`}>meow</div>
-      <div
-        className="cat-photo"
-        role="img"
-        aria-label="Jam Jam"
-        style={{ backgroundImage: `url(${p.src})`, backgroundSize: p.size, backgroundPosition: p.pos }}
-      />
+      <img className={`cat-photo ${p.flip ? 'flip' : ''}`} src={p.src} alt="" draggable={false} />
     </button>
   );
 }
