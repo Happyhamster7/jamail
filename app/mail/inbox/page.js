@@ -5,7 +5,7 @@ import Topbar from '@/components/Topbar';
 import { useArchive } from '@/components/ArchiveContext';
 
 export default function Inbox() {
-  const { data, error, read } = useArchive();
+  const { data, error, read, markAllUnread } = useArchive();
 
   return (
     <main className="page">
@@ -39,6 +39,11 @@ export default function Inbox() {
               );
             })}
           </div>
+          {data.messages.some((m) => read.includes(m.slug)) && (
+            <button className="btn ghost block mark-unread" onClick={markAllUnread}>
+              ✉️ Mark all as unread
+            </button>
+          )}
         </>
       )}
     </main>

@@ -64,7 +64,14 @@ export function ArchiveProvider({ children }) {
     });
   }, []);
 
-  return <Ctx.Provider value={{ data, error, read, markRead, reload: load }}>{children}</Ctx.Provider>;
+  const markAllUnread = useCallback(() => {
+    setRead([]);
+    try {
+      localStorage.removeItem(READ_KEY);
+    } catch {}
+  }, []);
+
+  return <Ctx.Provider value={{ data, error, read, markRead, markAllUnread, reload: load }}>{children}</Ctx.Provider>;
 }
 
 export const useArchive = () => useContext(Ctx);

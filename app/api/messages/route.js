@@ -21,6 +21,8 @@ export async function POST(request) {
     email: str(m.email, 100).trim() || `${slugify(first)}${last ? '.' + slugify(last) : ''}@jamail.com`,
     avatarUrl: str(m.avatarUrl, 500),
     body: str(m.body, 20000),
+    sentTime: str(m.sentTime, 30).trim(),
+    bounceText: str(m.bounceText, 300).trim(),
     attachments: (Array.isArray(m.attachments) ? m.attachments : []).slice(0, 50).map((a) => ({
       url: str(a.url, 500),
       kind: a.kind === 'video' ? 'video' : 'image',

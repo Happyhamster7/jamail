@@ -603,3 +603,5 @@ img, video { max-width: 100%; display: block; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .env-badge, .folder-row, .env-tile, .media-grid .thumb, .tap-hint, .overlay { opacity: 1; transform: none; }
 }
+
+.mark-unread { margin-top: 28px; }

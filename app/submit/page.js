@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Thumb } from '@/components/Media';
-import { UPLOAD_FOLDERS, folderByKey, kindOf, slugify } from '@/lib/config';
+import { DEFAULT_BOUNCE, DEFAULT_TIME, UPLOAD_FOLDERS, folderByKey, kindOf, slugify } from '@/lib/config';
 import { uploadFile } from '@/lib/upload-client';
 
 const PW_KEY = 'jamail-submit-pw';
@@ -60,6 +60,8 @@ export default function Submit() {
 
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
+  const [sentTime, setSentTime] = useState('');
+  const [bounceText, setBounceText] = useState('');
   const [avatar, setAvatar] = useState(null);
   const [atts, setAtts] = useState([]);
   const [createdAt, setCreatedAt] = useState(null);
@@ -103,6 +105,8 @@ export default function Submit() {
     if (!m) return;
     setEmail(m.email || '');
     setBody(m.body || '');
+    setSentTime(m.sentTime || '');
+    setBounceText(m.bounceText || '');
     setAvatar(m.avatarUrl ? { url: m.avatarUrl, preview: m.avatarUrl } : null);
     setAtts((m.attachments || []).map(fromSaved));
     setCreatedAt(m.createdAt);
@@ -153,6 +157,8 @@ export default function Submit() {
           lastName: last,
           email,
           body,
+          sentTime,
+          bounceText,
           avatarUrl,
           attachments: done.map((a) => ({ url: a.url, kind: a.kind })),
           createdAt,
@@ -291,8 +297,25 @@ export default function Submit() {
           />
         </div>
         <div>
+          <label className="field-label" htmlFor="sent">Time you sent it (any time you like)</label>
+          <input id="sent" className="input" value={sentTime} onChange={(e) => setSentTime(e.target.value)} placeholder={DEFAULT_TIME} maxLength={30} />
+        </div>
+        <div>
           <label className="field-label" htmlFor="body">Message</label>
           <textarea id="body" className="textarea" value={body} onFocus={onBodyFocus} onChange={(e) => setBody(e.target.value)} />
+        </div>
+        <div>
+          <label className="field-label" htmlFor="bounce">Error message when Shiv tries to reply to you</label>
+          <p className="hint">Shows under &ldquo;Message not delivered&rdquo;.</p>
+          <textarea
+            id="bounce"
+            className="textarea"
+            style={{ minHeight: 80 }}
+            value={bounceText}
+            onChange={(e) => setBounceText(e.target.value)}
+            placeholder={DEFAULT_BOUNCE}
+            maxLength={300}
+          />
         </div>
         <div>
           <label className="field-label">Attachments (pics &amp; videos)</label>

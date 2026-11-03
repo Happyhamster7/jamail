@@ -5,6 +5,7 @@ import { useArchive } from '@/components/ArchiveContext';
 import { Lightbox, Thumb } from '@/components/Media';
 import { Close, Reply, Smile } from '@/components/Icons';
 import Topbar from '@/components/Topbar';
+import { DEFAULT_BOUNCE, DEFAULT_TIME } from '@/lib/config';
 
 const EMOJIS = ['❤️', '😂', '😭', '🥹', '🎉', '🐱'];
 
@@ -88,7 +89,7 @@ export default function Message() {
           <div className="msg-meta">
             <b>{m.email}</b>
             <br />
-            to me · 25:00 am
+            to me · {m.sentTime || DEFAULT_TIME}
           </div>
         </div>
       </div>
@@ -118,7 +119,7 @@ export default function Message() {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="bounce-ico">⚠️</div>
             <h3>Message not delivered</h3>
-            <p>Error — this recipient is too busy eating the world and cannot be reached.</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{m.bounceText || DEFAULT_BOUNCE}</p>
             <div className="code">550 5.1.1 &lt;{m.email}&gt;: recipient is currently eating the world</div>
             <button className="btn block" onClick={() => setBounce(false)}>OK fine</button>
           </div>
